@@ -6,7 +6,7 @@ import com.masai.Bean.Course;
 import com.masai.Dao.CourseDao;
 import com.masai.Dao.CourseDaoImpl;
 import com.masai.Exceptions.CourseException;
-public class getCourseByIdUseCase {
+public class GetCourseByIdUseCase {
    
 	
 	public static void main(String[] args) {
