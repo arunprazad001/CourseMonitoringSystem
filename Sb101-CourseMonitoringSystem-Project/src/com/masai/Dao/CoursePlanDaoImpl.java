@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.masai.Bean.Batch;
 import com.masai.Bean.CoursePlan;
+import com.masai.Bean.Faculty;
 import com.masai.Exceptions.BatchException;
 import com.masai.Exceptions.CoursePlanException;
+import com.masai.Exceptions.FacultyException;
 import com.masai.utility.DBUtil;
 
 public class CoursePlanDaoImpl implements CoursePlanDao {
@@ -130,6 +134,57 @@ public class CoursePlanDaoImpl implements CoursePlanDao {
 	
 		return c;
 		
+	}
+
+	@Override
+	public List<CoursePlan> getAllCoursePlanDetails() throws CoursePlanException {
+          List<CoursePlan> cc= new ArrayList<>();
+		
+		
+		try(Connection conn= DBUtil.ProvideConnection()) {
+			
+			PreparedStatement ps= conn.prepareStatement("select * from coursePlan");
+			
+			
+			
+			ResultSet rs= ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				
+				int pid= rs.getInt("planId");
+			int bid= rs.getInt("BatchId");
+				int dno= rs.getInt("daynumber");
+				String top= rs.getString("topic");
+				String stat= rs.getString("status");
+				
+				
+				
+				
+			CoursePlan cp=new CoursePlan(pid,bid,dno,top,stat);
+				
+		 cc.add(cp);
+				
+				
+				
+			}
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			throw new CoursePlanException(e.getMessage());
+		}
+		
+		
+		if(cc.size() == 0)
+			throw new CoursePlanException("No courseplan found..");
+		
+		
+		
+		
+		return cc;
 	}
 
 }

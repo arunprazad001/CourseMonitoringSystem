@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.masai.Bean.Admin;
 import com.masai.Bean.Course;
@@ -230,4 +232,58 @@ public class FacultyDaoImpl implements FacultyDao {
 		return message;
 	}
 
-}
+	@Override
+	public List<Faculty> getAllFacultyDetails() throws FacultyException {
+     List<Faculty> fac= new ArrayList<>();
+		
+		
+		try(Connection conn= DBUtil.ProvideConnection()) {
+			
+			PreparedStatement ps= conn.prepareStatement("select * from faculty");
+			
+			
+			
+			ResultSet rs= ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				
+				int fid= rs.getInt("facultyId");
+				String fname= rs.getString("facultyName");
+				String fad= rs.getString("facultyaddress");
+				String mob= rs.getString("mobile");
+				String email= rs.getString("email");
+				String user= rs.getString("username");
+				String pass= rs.getString("password");
+				
+				
+				
+			Faculty f=new Faculty(fid,fname,fad,mob,email,user,pass);
+				
+		  fac.add(f);
+				
+				
+				
+			}
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			throw new FacultyException(e.getMessage());
+		}
+		
+		
+		if(fac.size() == 0)
+			throw new FacultyException("No course found..");
+		
+		
+		
+		
+		return fac;
+	}
+
+	}
+
+

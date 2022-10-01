@@ -1,5 +1,7 @@
 package com.masai.Dao;
 
+import java.util.List;
+
 import com.masai.Bean.Course;
 import com.masai.Exceptions.CourseException;
 
@@ -12,5 +14,5 @@ public interface CourseDao {
 	
 	public Course getCourseById(int courseId)throws CourseException;
 	
-	
+	public List<Course> getAllStudentDetails() throws CourseException;
 }

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.masai.Bean.Course;
 import com.masai.Exceptions.CourseException;
@@ -132,6 +134,55 @@ public class CourseDaoImpl implements CourseDao {
 		
 		return message;
 	
+	}
+
+	@Override
+	public List<Course> getAllStudentDetails() throws CourseException {
+        List<Course> courses= new ArrayList<>();
+		
+		
+		try(Connection conn= DBUtil.ProvideConnection()) {
+			
+			PreparedStatement ps= conn.prepareStatement("select * from course");
+			
+			
+			
+			ResultSet rs= ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				
+				int cid= rs.getInt("courseId");
+				String cn= rs.getString("courseName");
+				int cf= rs.getInt("fee");
+				String cd= rs.getString("courseDescription");
+				
+				
+				
+			Course c=new Course(cid,cn,cf,cd);	
+				
+			courses.add(c);
+				
+				
+				
+			}
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			throw new CourseException(e.getMessage());
+		}
+		
+		
+		if(courses.size() == 0)
+			throw new CourseException("No course found..");
+		
+		
+		
+		
+		return courses;
 	}
 
 	

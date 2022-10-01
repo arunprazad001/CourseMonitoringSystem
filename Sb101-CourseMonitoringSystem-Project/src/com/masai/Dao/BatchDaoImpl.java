@@ -4,10 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.masai.Bean.Batch;
+import com.masai.Bean.Course;
 import com.masai.Bean.Faculty;
 import com.masai.Exceptions.BatchException;
+import com.masai.Exceptions.CourseException;
 import com.masai.Exceptions.FacultyException;
 import com.masai.utility.DBUtil;
 
@@ -132,4 +136,58 @@ public class BatchDaoImpl implements BatchDao {
 		
 	}
 
-}
+	@Override
+	public List<Batch> getAllBatchDetails() throws BatchException {
+		 List<Batch> batches= new ArrayList<>();
+			
+			
+			try(Connection conn= DBUtil.ProvideConnection()) {
+				
+				PreparedStatement ps= conn.prepareStatement("select * from batch");
+				
+				
+				
+				ResultSet rs= ps.executeQuery();
+				
+				while(rs.next()) {
+					
+					
+					int bid= rs.getInt("batchId");
+					int cid= rs.getInt("courseId");
+					int fid= rs.getInt("facultyId");
+					int no= rs.getInt("numberofStudents");
+					String date=rs.getString("batchStartDate");
+					String du=rs.getString("duration");
+					
+					
+					
+				Batch b=new Batch(bid,cid,fid,no,date,du);
+					
+				batches.add(b);
+					
+					
+					
+				}
+				
+				
+				
+				
+				
+			} catch (SQLException e) {
+				throw new BatchException(e.getMessage());
+			}
+			
+			
+			if(batches.size() == 0)
+				throw new BatchException("No batch found..");
+			
+			
+			
+			
+			return batches;
+		}
+
+		
+	}
+
+
