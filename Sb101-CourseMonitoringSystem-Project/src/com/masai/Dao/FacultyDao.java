@@ -19,4 +19,6 @@ public interface FacultyDao {
 	public Faculty GetFacultyById(int facultyId)throws FacultyException;
 	public List<Faculty> getAllFacultyDetails() throws FacultyException;
 	public String ShowFacultyAllocated(String s);
+	public String UpdatePassword(Faculty faculty,String newpassword);
+	
 }

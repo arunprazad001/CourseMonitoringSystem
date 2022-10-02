@@ -37,7 +37,8 @@ System.out.println("Enter your choice");
             			+ "13: create course plan \n"
             			+ "14: update course plan \n"
             			+ "15: view course plan by id\n"
-            			+ "16: view course plan by id\n ");
+            			+ "16: view course plan by id\n "
+            			+ "17 : Generate report of every batch");
             	System.out.println("Enter your choice");
             	 choice=sc.nextInt();
             	 switch(choice) {
@@ -57,6 +58,7 @@ System.out.println("Enter your choice");
             	 case 14: UpdateCoursePlanUseCase.CoursePlanUpdate();
             	 case 15: GetCoursePlanByIdUseCase.CoursePlanById();
             	 case 16: ViewAllCoursePlansUseCase.AllCoursePlans();
+            	 case 17: ViewAllBatchesUseCase.AllBatches();
             	 }
             	
             }
@@ -65,12 +67,14 @@ System.out.println("Enter your choice");
             if(Flogin) {
             	System.out.println("Enter your choice");
             	System.out.println("1: view course by id\n"
-            			+ "2: view all courses \n");
+            			+ "2: view all courses \n"
+            			+ "3: update password");
             	System.out.println("Enter your choice");
            	   choice=sc.nextInt();
            	   switch(choice) {
            	   case 1: FacultyGetCourseByIdUseCase.CourseById();
            	   case 2: FacultyViewAllCoursesUseCase.AllCoursesInFaculty();
+           	   case 3: FacultyUpdatePassword.passwordUpdate();
            	   }
             }
           

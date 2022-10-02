@@ -284,6 +284,38 @@ public class FacultyDaoImpl implements FacultyDao {
 		return fac;
 	}
 
+	@Override
+	public String UpdatePassword(Faculty faculty,String newpassword) {
+		 String message = "Nothing to Update!";
+			
+			
+			
+			
+			try(Connection conn= DBUtil.ProvideConnection()) {
+				
+				PreparedStatement ps= conn.prepareStatement
+						("update faculty set password=? where username=?");
+				ps.setString(1,newpassword);
+				ps.setString(2,faculty.getUserName());
+				int x= ps.executeUpdate();
+				
+				
+				if(x > 0)
+					message = "Updated Sucessfully !";
+				
+				
+				
+			} catch (SQLException e) {
+				message = e.getMessage();
+			}
+			
+			
+		
+		
+			
+			return message;
+	}
+
 	}
 
 
