@@ -25,9 +25,10 @@ public class FacultyUpdatePassword {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    if(username.equalsIgnoreCase(f.getUserName()) && currpass.equalsIgnoreCase(f.getPassword())) {
-	    	dao.UpdatePassword(f, newpass);
-	    }
+//	    if(username.equalsIgnoreCase(f.getUserName()) && currpass.equalsIgnoreCase(f.getPassword())) {
+//	    	dao.UpdatePassword(f, newpass);
+//	    }
+		dao.UpdatePassword(f, newpass);
 	}
 
 }
