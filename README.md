@@ -7,4 +7,4 @@ TECH STACKS:
 
 JAVA | JDBC | MySql | Github
 
-Deployed Explanation video : https://drive.google.com/file/d/1NRHsC6gsuNYbP_t14y9D96DnFEfEcdyP/view?usp=share_link
+
